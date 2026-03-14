@@ -18,7 +18,7 @@ export async function addToSheet(formData: { name: string, phone: string, grade:
 
     await sheet.addRow({
       "Ism": formData.name,
-      "Telefon": formData.phone,
+      "Telefon": `'${formData.phone}`,
       "Sinf": formData.grade,
       "Sana": new Date().toLocaleString('uz-UZ'),
     });
