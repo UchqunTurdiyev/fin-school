@@ -1,20 +1,33 @@
 "use client";
 
-import React, { useState } from 'react';
+import { addToSheet } from '@/actions/actions';
+import React, { useState } from 'react'; // Fayl yo'lini tekshiring
 
 const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Bu yerda API orqali Telegram yoki DB ga yuborish logikasini yozish mumkin
-    setTimeout(() => {
-      setLoading(false);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("fullname") as string,
+      phone: "+998 " + formData.get("phone") as string,
+      grade: formData.get("grade") as string,
+    };
+
+    const result = await addToSheet(data);
+
+    if (result.success) {
       setSubmitted(true);
-    }, 1500);
+    } else {
+      setError("Kechirasiz, xatolik yuz berdi. Qaytadan urinib ko'ring.");
+    }
+    setLoading(false);
   };
 
   if (submitted) {
@@ -41,10 +54,13 @@ const RegistrationForm = () => {
       </div>
       
       <form onSubmit={handleSubmit} className="p-8 space-y-5">
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">To&apos;liq ismingiz</label>
           <input 
             required
+            name="fullname"
             type="text" 
             placeholder="Masalan: Aziz Rahimov"
             className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
@@ -57,6 +73,7 @@ const RegistrationForm = () => {
             <span className="absolute left-4 top-3 text-slate-400">+998</span>
             <input 
               required
+              name="phone"
               type="tel" 
               placeholder="90 123 45 67"
               className="w-full pl-14 pr-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
@@ -66,11 +83,14 @@ const RegistrationForm = () => {
 
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">Sinf </label>
-          <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all appearance-none bg-white">
-            <option>1-4 sinflar</option>
-            <option>5-8 sinflar</option>
-            <option>9-11 sinfgacha</option>
-            <option>Maktabgacha ta&apos;lim</option>
+          <select 
+            name="grade"
+            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all appearance-none bg-white"
+          >
+            <option value="1-4 sinflar">1-4 sinflar</option>
+            <option value="5-8 sinflar">5-8 sinflar</option>
+            <option value="9-11 sinfgacha">9-11 sinfgacha</option>
+            <option value="Maktabgacha ta'lim">Maktabgacha ta&apos;lim</option>
           </select>
         </div>
 
