@@ -2,23 +2,26 @@
 
 import { addToSheet } from '@/actions/actions';
 import React, { useState } from 'react'; // Fayl yo'lini tekshiring
+import { useRouter } from 'next/navigation'; // MANA SHU TO'G'RI
 
 const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter(); // Endi xato bermaydi
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // 1. MUHIM: Formani darhol o'zgaruvchiga olamiz
+    // 1. Formani o'zgaruvchiga olamiz (null xatosini oldini olish uchun)
     const form = e.currentTarget; 
     
     setLoading(true);
     setError("");
 
-    const formData = new FormData(form); // e.currentTarget emas, form ishlatamiz
+    const formData = new FormData(form);
     
+    // Telefon raqamini chiroyli formatlash
     let rawPhone = formData.get("phone") as string;
     const cleanPhone = rawPhone.replace(/\D/g, "");
     const formattedPhone = cleanPhone.startsWith("998") ? "+" + cleanPhone : "+998" + cleanPhone;
@@ -30,8 +33,9 @@ const RegistrationForm = () => {
     };
 
     try {
+      // Parallel ravishda Sheets va Telegram'ga yuborish
       const [sheetResult] = await Promise.all([
-        addToSheet(data),
+        addToSheet(data), // Bu funksiya sizda mavjud deb hisoblaymiz
         fetch("/api/send-lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -41,8 +45,10 @@ const RegistrationForm = () => {
 
       if (sheetResult.success) {
         setSubmitted(true);
-        // 2. ENDI XATO BERMAYDI: O'zgaruvchidagi formani reset qilamiz
-        form.reset(); 
+        form.reset(); // Formani tozalash
+        
+        // 2. Muvaffaqiyatli sahifaga o'tkazish
+        router.push('/thanks'); 
       } else {
         setError("Kechirasiz, bazaga saqlashda muammo bo'ldi.");
       }
