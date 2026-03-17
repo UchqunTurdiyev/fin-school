@@ -10,24 +10,48 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // 1. MUHIM: Formani darhol o'zgaruvchiga olamiz
+    const form = e.currentTarget; 
+    
     setLoading(true);
     setError("");
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form); // e.currentTarget emas, form ishlatamiz
+    
+    let rawPhone = formData.get("phone") as string;
+    const cleanPhone = rawPhone.replace(/\D/g, "");
+    const formattedPhone = cleanPhone.startsWith("998") ? "+" + cleanPhone : "+998" + cleanPhone;
+
     const data = {
       name: formData.get("fullname") as string,
-      phone: "+998 " + formData.get("phone") as string,
+      phone: formattedPhone,
       grade: formData.get("grade") as string,
     };
 
-    const result = await addToSheet(data);
+    try {
+      const [sheetResult] = await Promise.all([
+        addToSheet(data),
+        fetch("/api/send-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+      ]);
 
-    if (result.success) {
-      setSubmitted(true);
-    } else {
-      setError("Kechirasiz, xatolik yuz berdi. Qaytadan urinib ko'ring.");
+      if (sheetResult.success) {
+        setSubmitted(true);
+        // 2. ENDI XATO BERMAYDI: O'zgaruvchidagi formani reset qilamiz
+        form.reset(); 
+      } else {
+        setError("Kechirasiz, bazaga saqlashda muammo bo'ldi.");
+      }
+    } catch (err) {
+      console.error("Xatolik:", err);
+      setError("Aloqa uzildi. Iltimos, qaytadan urinib ko'ring.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (submitted) {
