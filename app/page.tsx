@@ -103,7 +103,7 @@ export default function UzFINLanding() {
           </div>
           
           {/* Ma'lumot kartochkasi */}
-          <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-[2rem] shadow-2xl text-[#0f223c] z-20 animate-bounce-slow">
+          <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-4xl shadow-2xl text-[#0f223c] z-20 animate-bounce-slow">
             <div className="flex items-center gap-5">
               <div className="bg-[#ffbf00]/10 p-4 rounded-2xl text-[#ffbf00]"><Clock size={32} strokeWidth={2.5} /></div>
               <div>
