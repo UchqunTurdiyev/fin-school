@@ -64,10 +64,10 @@ export default function UzFINLanding() {
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-10 z-10">
           <div className="inline-flex items-center gap-2 bg-[#ffbf00]/10 text-[#ffbf00] px-4 py-2 rounded-lg font-black text-xs uppercase tracking-[0.2em] border border-[#ffbf00]/20">
+       
             <span className="w-2 h-2 rounded-full bg-[#ffbf00] animate-pulse"></span>
             Qabul Ochiq (0-11 sinflar)
           </div>
-          
           <h1 className="text-6xl lg:text-8xl font-black leading-[0.95] tracking-tighter">
             Farzandingiz <br />
             <span className="text-[#ffbf00] drop-shadow-sm">Ishonchli</span> <br />
@@ -79,9 +79,11 @@ export default function UzFINLanding() {
           </p>
           
           <div className="flex flex-wrap gap-5 pt-4">
+            <a href="#form">
             <button className="bg-[#ffbf00] text-[#0f223c] px-10 py-5 rounded-2xl font-black text-lg hover:bg-[#ffcf33] transition-all shadow-2xl shadow-[#ffbf00]/20 active:scale-95 uppercase tracking-tight">
               RO&apos;YXATDAN O&apos;TISH
             </button>
+            </a>
             <div className="flex items-center gap-4 bg-white/5 p-2 pr-6 rounded-2xl border border-white/10 backdrop-blur-sm">
               <div className="flex -space-x-3">
                 {[1,2,3].map(i => (
@@ -200,7 +202,7 @@ export default function UzFINLanding() {
     </section>
 
     {/* 6. REGISTRATION */}
-    <section className="py-32 bg-[#0f223c] px-6">
+    <section className="py-32 bg-[#0f223c] px-6" id='form'>
       <div className="max-w-4xl mx-auto text-center space-y-12">
          <div className="space-y-4">
             <h2 className="text-5xl font-black uppercase tracking-tighter">Bepul konsultatsiya olish</h2>
@@ -225,7 +227,7 @@ export default function UzFINLanding() {
           </p>
           <div className="flex gap-4">
             {[Instagram, Send].map((Icon, i) => (
-              <a key={i} href="#" className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-[#ffbf00] hover:text-[#0f223c] transition-all duration-300">
+              <a key={i} href="https://www.instagram.com/uzfin.school/" className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-[#ffbf00] hover:text-[#0f223c] transition-all duration-300">
                 <Icon size={24} />
               </a>
             ))}
