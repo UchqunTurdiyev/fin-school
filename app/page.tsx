@@ -58,7 +58,7 @@ export default function UzFINLanding() {
     {/* 2. HERO SECTION */}
     <section className="pt-40 pb-24 px-6 relative overflow-hidden">
       {/* Dekorativ fon elementlari */}
-      <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-[#ffbf00]/5 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-2/3 h-full bg-linear-to-l from-[#ffbf00]/5 to-transparent pointer-events-none"></div>
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#0f2e4d] rounded-full blur-[120px] opacity-50"></div>
 
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -98,7 +98,7 @@ export default function UzFINLanding() {
         <div className="relative group">
           <div className="absolute inset-0 bg-[#ffbf00] rounded-[3rem] rotate-3 group-hover:rotate-0 transition-transform duration-500 blur-xl opacity-10"></div>
           <div className="relative rounded-[3rem] overflow-hidden border-2 border-white/10 shadow-2xl z-10">
-            <img src="/bino.jpg" alt="UzFIN School Building" className="w-full h-[600px] object-cover group-hover:scale-105 transition duration-700" />
+            <img src="/bino2.png" alt="UzFIN School Building" className="w-full h-[600px] object-cover group-hover:scale-105 transition duration-700" />
             <div className="absolute inset-0 bg-linear-to-t from-[#0f223c] via-transparent to-transparent opacity-60"></div>
           </div>
           
@@ -176,7 +176,7 @@ export default function UzFINLanding() {
            <div className="absolute inset-0 bg-[#ffbf00] blur-[100px] opacity-10"></div>
            <div className="relative">
               <div className="absolute -inset-4 border-2 border-[#ffbf00]/30 rounded-[3rem] -rotate-3"></div>
-              <img src="/komp.jpg" alt="Director" className="relative w-full aspect-[4/5] object-cover rounded-[3rem] shadow-2xl border-4 border-[#0f2e4d]" />
+              <img src="/direktor.JPG" alt="Director" className="relative w-full aspect-[4/5] object-cover rounded-[3rem] shadow-2xl border-4 border-[#0f2e4d]" />
            </div>
         </div>
       </div>
@@ -192,7 +192,7 @@ export default function UzFINLanding() {
           { label: "Rivojlantiruvchi to'garaklar", val: "10+" }
         ].map((stat, i) => (
           <div key={i} className="text-center space-y-2">
-            <div className="text-6xl font-black tracking-tighter">{stat.val}</div>
+            <div className="text-6xl max-md:text-2xl font-black tracking-tighter">{stat.val}</div>
             <div className="text-xs font-black uppercase tracking-widest opacity-80">{stat.label}</div>
           </div>
         ))}
