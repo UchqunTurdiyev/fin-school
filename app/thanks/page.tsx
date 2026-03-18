@@ -16,8 +16,8 @@ export default function ThanksPage() {
 
     // 15 soniyadan keyin Telegram'ga o'tkazish
     const timeout = setTimeout(() => {
-      window.location.href = "https://t.me/finschool_admin"; // O'zingizning profilingiz yoki guruhingiz linki
-    }, 15000);
+      window.location.href = "https://t.me/UzFIN_school"; // O'zingizning profilingiz yoki guruhingiz linki
+    }, 6000);
 
     return () => {
       clearInterval(timer);
