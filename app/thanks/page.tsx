@@ -91,7 +91,7 @@ export default function ThanksPage() {
       </div>
 
       <a 
-        href="https://t.me/finschool_admin" 
+        href="https://t.me/UzFIN_school" 
         className="group relative flex items-center justify-center gap-4 bg-yellow-500 text-[#001f3f] px-10 py-5 rounded-3xl font-black text-lg hover:bg-yellow-400 transition-all duration-300 shadow-xl shadow-yellow-500/10 active:scale-95 overflow-hidden"
       >
         <span className="relative z-10 flex items-center gap-3">
